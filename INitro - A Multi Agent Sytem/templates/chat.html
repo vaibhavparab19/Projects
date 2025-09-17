@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflect AI Chat - INitro Agent</title>
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-blue': '#00d4ff',
+                        'cyber-purple': '#8b5cf6',
+                        'cyber-pink': '#ec4899',
+                        'dark-bg': '#0a0a0f',
+                        'dark-surface': '#1a1a2e',
+                        'dark-card': '#16213e',
+                        'dark-border': '#2d3748'
+                    },
+                    animation: {
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slide-up 0.3s ease-out',
+                        'fade-in': 'fade-in 0.5s ease-out',
+                        'typing': 'typing 1.5s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        'pulse-glow': {
+                            '0%': { boxShadow: '0 0 5px #00d4ff' },
+                            '100%': { boxShadow: '0 0 20px #00d4ff, 0 0 30px #00d4ff' }
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        'typing': {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.3' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #00d4ff;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #0099cc;
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Cyber border effect */
+        .cyber-border {
+            border: 1px solid transparent;
+            background: linear-gradient(#1a1a2e, #1a1a2e) padding-box,
+                       linear-gradient(135deg, #00d4ff, #8b5cf6) border-box;
+        }
+        
+        /* Message bubble animations */
+        .message-bubble {
+            animation: slide-up 0.3s ease-out;
+        }
+        
+        /* Typing indicator */
+        .typing-dot {
+            animation: typing 1.5s ease-in-out infinite;
+        }
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-white min-h-screen font-sans">
+    <div x-data="chatApp()" class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-80 bg-dark-surface border-r border-dark-border flex flex-col">
+            <!-- Header -->
+            <div class="p-6 border-b border-dark-border">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-r from-cyber-blue to-cyber-purple rounded-lg flex items-center justify-center">
+                        <i data-lucide="brain-circuit" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold gradient-text">Reflect AI</h1>
+                        <p class="text-sm text-gray-400">Marketing Intelligence</p>
+                    </div>
+                </div>
+                
+                <!-- Session Info -->
+                <div class="bg-dark-card rounded-lg p-3 cyber-border">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-gray-300">Session Status</span>
+                        <div class="flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-xs text-green-400">Connected</span>
+                        </div>
+                    </div>
+                    <div class="text-xs text-gray-400" x-text="sessionInfo"></div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="p-4 border-b border-dark-border">
+                <h3 class="text-sm font-semibold text-gray-300 mb-3">Quick Actions</h3>
+                <div class="space-y-2">
+                    <template x-for="action in quickActions" :key="action.action">
+                        <button @click="triggerAction(action.action)" 
+                                class="w-full text-left p-3 bg-dark-card hover:bg-dark-border rounded-lg transition-colors cyber-border group">
+                            <div class="flex items-center space-x-3">
+                                <i :data-lucide="action.icon" class="w-4 h-4 text-cyber-blue group-hover:text-cyber-purple transition-colors"></i>
+                                <div>
+                                    <div class="text-sm font-medium" x-text="action.title"></div>
+                                    <div class="text-xs text-gray-400" x-text="action.description"></div>
+                                </div>
+                            </div>
+                        </button>
+                    </template>
+                </div>
+            </div>
+            
+            <!-- Memory Context -->
+            <div class="p-4 flex-1 overflow-y-auto custom-scrollbar">
+                <h3 class="text-sm font-semibold text-gray-300 mb-3">Memory Context</h3>
+                <div class="space-y-2">
+                    <template x-for="item in memoryContext" :key="item.id">
+                        <div class="bg-dark-card rounded-lg p-3 text-xs">
+                            <div class="text-gray-300 font-medium" x-text="item.title"></div>
+                            <div class="text-gray-400 mt-1" x-text="item.content"></div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            
+            <!-- Footer Actions -->
+            <div class="p-4 border-t border-dark-border">
+                <button @click="clearChat()" 
+                        class="w-full p-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors text-sm font-medium">
+                    <i data-lucide="trash-2" class="w-4 h-4 inline mr-2"></i>
+                    Clear Chat
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Chat Area -->
+        <div class="flex-1 flex flex-col">
+            <!-- Chat Header -->
+            <div class="bg-dark-surface border-b border-dark-border p-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <h2 class="text-lg font-semibold">INitro Agent</h2>
+                        <div x-show="isTyping" class="flex items-center space-x-1 text-cyber-blue">
+                            <div class="w-1 h-1 bg-cyber-blue rounded-full typing-dot"></div>
+                            <div class="w-1 h-1 bg-cyber-blue rounded-full typing-dot"></div>
+                            <div class="w-1 h-1 bg-cyber-blue rounded-full typing-dot"></div>
+                            <span class="text-xs ml-2">AI is thinking...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2">
+                        <button @click="getSuggestions()" 
+                                class="p-2 bg-dark-card hover:bg-dark-border rounded-lg transition-colors">
+                            <i data-lucide="lightbulb" class="w-4 h-4 text-cyber-blue"></i>
+                        </button>
+                        <button @click="exportChat()" 
+                                class="p-2 bg-dark-card hover:bg-dark-border rounded-lg transition-colors">
+                            <i data-lucide="download" class="w-4 h-4 text-cyber-blue"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Messages Area -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4" x-ref="messagesContainer">
+                <template x-for="message in messages" :key="message.id">
+                    <div class="message-bubble" :class="message.role === 'user' ? 'flex justify-end' : 'flex justify-start'">
+                        <div class="max-w-3xl" :class="message.role === 'user' ? 'bg-cyber-blue text-dark-bg' : 'bg-dark-card cyber-border'" 
+                             class="rounded-2xl p-4 shadow-lg">
+                            
+                            <!-- Message Header -->
+                            <div class="flex items-center space-x-2 mb-2" x-show="message.role === 'assistant'">
+                                <div class="w-6 h-6 bg-gradient-to-r from-cyber-blue to-cyber-purple rounded-full flex items-center justify-center">
+                                    <i data-lucide="brain-circuit" class="w-3 h-3 text-white"></i>
+                                </div>
+                                <span class="text-xs text-gray-400">Reflect AI</span>
+                                <div x-show="message.metadata?.reflection_score" class="flex items-center space-x-1">
+                                    <i data-lucide="zap" class="w-3 h-3 text-yellow-400"></i>
+                                    <span class="text-xs text-yellow-400" x-text="'Score: ' + (message.metadata?.reflection_score || 0).toFixed(1)"></span>
+                                </div>
+                            </div>
+                            
+                            <!-- Message Content -->
+                            <div class="prose prose-invert max-w-none">
+                                <p x-text="message.content" class="whitespace-pre-wrap"></p>
+                            </div>
+                            
+                            <!-- Message Footer -->
+                            <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-600">
+                                <span class="text-xs text-gray-400" x-text="formatTime(message.timestamp)"></span>
+                                <div class="flex items-center space-x-2">
+                                    <button x-show="message.role === 'assistant'" @click="copyMessage(message.content)" 
+                                            class="text-xs text-gray-400 hover:text-cyber-blue transition-colors">
+                                        <i data-lucide="copy" class="w-3 h-3"></i>
+                                    </button>
+                                    <button x-show="message.role === 'assistant'" @click="regenerateResponse(message)" 
+                                            class="text-xs text-gray-400 hover:text-cyber-blue transition-colors">
+                                        <i data-lucide="refresh-cw" class="w-3 h-3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                
+                <!-- Empty State -->
+                <div x-show="messages.length === 0" class="flex flex-col items-center justify-center h-full text-center">
+                    <div class="w-20 h-20 bg-gradient-to-r from-cyber-blue to-cyber-purple rounded-full flex items-center justify-center mb-4 animate-pulse-glow">
+                        <i data-lucide="brain-circuit" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold gradient-text mb-2">Welcome to Reflect AI</h3>
+                    <p class="text-gray-400 mb-6 max-w-md">Your intelligent INitro Agent is ready to help with campaign analysis, customer insights, and strategic recommendations.</p>
+                    
+                    <!-- Suggestion Cards -->
+                    <div class="grid grid-cols-2 gap-4 max-w-2xl">
+                        <template x-for="suggestion in welcomeSuggestions" :key="suggestion.title">
+                            <button @click="sendMessage(suggestion.message)" 
+                                    class="p-4 bg-dark-card hover:bg-dark-border rounded-xl cyber-border transition-colors text-left group">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <i :data-lucide="suggestion.icon" class="w-5 h-5 text-cyber-blue group-hover:text-cyber-purple transition-colors"></i>
+                                    <span class="font-medium" x-text="suggestion.title"></span>
+                                </div>
+                                <p class="text-sm text-gray-400" x-text="suggestion.description"></p>
+                            </button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Suggestions Bar -->
+            <div x-show="suggestions.length > 0" class="border-t border-dark-border p-4">
+                <div class="flex items-center space-x-2 mb-2">
+                    <i data-lucide="lightbulb" class="w-4 h-4 text-cyber-blue"></i>
+                    <span class="text-sm font-medium text-gray-300">Suggestions</span>
+                </div>
+                <div class="flex space-x-2 overflow-x-auto">
+                    <template x-for="suggestion in suggestions" :key="suggestion.title">
+                        <button @click="triggerAction(suggestion.action)" 
+                                class="flex-shrink-0 px-4 py-2 bg-dark-card hover:bg-dark-border rounded-lg cyber-border transition-colors text-sm">
+                            <span x-text="suggestion.title"></span>
+                        </button>
+                    </template>
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="border-t border-dark-border p-4">
+                <div class="flex space-x-4">
+                    <div class="flex-1 relative">
+                        <textarea x-model="currentMessage" 
+                                  @keydown.enter.prevent="handleEnter($event)"
+                                  @input="adjustTextareaHeight($event)"
+                                  placeholder="Ask me about campaigns, customers, or marketing strategies..."
+                                  class="w-full bg-dark-card border border-dark-border rounded-xl px-4 py-3 pr-12 text-white placeholder-gray-400 focus:outline-none focus:border-cyber-blue transition-colors resize-none"
+                                  rows="1"
+                                  :disabled="isTyping"></textarea>
+                        
+                        <!-- Send Button -->
+                        <button @click="sendCurrentMessage()" 
+                                :disabled="!currentMessage.trim() || isTyping"
+                                class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-cyber-blue hover:bg-cyber-purple disabled:bg-gray-600 disabled:cursor-not-allowed rounded-lg transition-colors">
+                            <i data-lucide="send" class="w-4 h-4 text-white"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Voice Input (Future Feature) -->
+                    <button class="p-3 bg-dark-card hover:bg-dark-border rounded-xl cyber-border transition-colors" 
+                            title="Voice input (coming soon)" disabled>
+                        <i data-lucide="mic" class="w-5 h-5 text-gray-400"></i>
+                    </button>
+                </div>
+                
+                <!-- Input Footer -->
+                <div class="flex items-center justify-between mt-2 text-xs text-gray-400">
+                    <span>Press Enter to send, Shift+Enter for new line</span>
+                    <span x-text="currentMessage.length + '/2000'"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notifications -->
+    <div x-show="toast.show" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform translate-y-2"
+         x-transition:enter-end="opacity-100 transform translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 transform translate-y-0"
+         x-transition:leave-end="opacity-0 transform translate-y-2"
+         class="fixed top-4 right-4 z-50">
+        <div class="bg-dark-card border cyber-border rounded-lg p-4 shadow-lg max-w-sm">
+            <div class="flex items-center space-x-3">
+                <i :data-lucide="toast.icon" class="w-5 h-5" :class="toast.type === 'error' ? 'text-red-400' : 'text-green-400'"></i>
+                <div>
+                    <div class="font-medium" x-text="toast.title"></div>
+                    <div class="text-sm text-gray-400" x-text="toast.message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function chatApp() {
+            return {
+                // State
+                messages: [],
+                currentMessage: '',
+                isTyping: false,
+                sessionId: null,
+                socket: null,
+                suggestions: [],
+                memoryContext: [],
+                sessionInfo: 'Initializing...',
+                
+                // Toast notifications
+                toast: {
+                    show: false,
+                    type: 'info',
+                    title: '',
+                    message: '',
+                    icon: 'info'
+                },
+                
+                // Quick actions
+                quickActions: [
+                    {
+                        title: 'Campaign Analysis',
+                        description: 'Analyze performance metrics',
+                        action: 'analyze_campaign',
+                        icon: 'bar-chart-3'
+                    },
+                    {
+                        title: 'Customer Insights',
+                        description: 'Segment analysis',
+                        action: 'analyze_customers',
+                        icon: 'users'
+                    },
+                    {
+                        title: 'Strategy Optimization',
+                        description: 'Optimize marketing strategy',
+                        action: 'optimize_strategy',
+                        icon: 'target'
+                    },
+                    {
+                        title: 'Export Report',
+                        description: 'Generate comprehensive report',
+                        action: 'export_report',
+                        icon: 'file-text'
+                    }
+                ],
+                
+                // Welcome suggestions
+                welcomeSuggestions: [
+                    {
+                        title: 'Campaign Performance',
+                        description: 'How are my campaigns performing?',
+                        message: 'Can you analyze my current campaign performance and provide insights?',
+                        icon: 'trending-up'
+                    },
+                    {
+                        title: 'Customer Segments',
+                        description: 'Show me customer insights',
+                        message: 'What are the key customer segments and their behaviors?',
+                        icon: 'users'
+                    },
+                    {
+                        title: 'Optimization Tips',
+                        description: 'How can I improve ROI?',
+                        message: 'What recommendations do you have to optimize my marketing ROI?',
+                        icon: 'zap'
+                    },
+                    {
+                        title: 'Market Trends',
+                        description: 'Latest industry insights',
+                        message: 'What are the current market trends I should be aware of?',
+                        icon: 'activity'
+                    }
+                ],
+                
+                // Initialize
+                init() {
+                    this.initializeSocket();
+                    this.loadChatHistory();
+                    
+                    // Initialize Lucide icons
+                    setTimeout(() => {
+                        lucide.createIcons();
+                    }, 100);
+                },
+                
+                // Socket initialization
+                initializeSocket() {
+                    this.socket = io();
+                    
+                    // Socket event handlers
+                    this.socket.on('connect', () => {
+                        this.sessionInfo = 'Connected to INitro Agent';
+                        this.socket.emit('join_chat', {});
+                    });
+                    
+                    this.socket.on('chat_joined', (data) => {
+                        this.sessionId = data.session_id;
+                        this.sessionInfo = `Session: ${data.session_id.substring(0, 8)}...`;
+                        this.showToast('success', 'Connected', 'Successfully connected to chat');
+                    });
+                    
+                    this.socket.on('chat_history', (data) => {
+                        this.messages = data.history;
+                        this.scrollToBottom();
+                    });
+                    
+                    this.socket.on('message_response', (data) => {
+                        this.isTyping = false;
+                        if (data.success) {
+                            this.messages.push(data.result.message);
+                            this.suggestions = data.result.suggestions || [];
+                            this.updateMemoryContext(data.result.context_used);
+                            this.scrollToBottom();
+                        }
+                    });
+                    
+                    this.socket.on('agent_typing', (data) => {
+                        this.isTyping = data.typing;
+                    });
+                    
+                    this.socket.on('suggestions_response', (data) => {
+                        this.suggestions = data.suggestions;
+                        this.updateMemoryContext(data.context);
+                    });
+                    
+                    this.socket.on('action_started', (data) => {
+                        this.showToast('info', 'Action Started', data.message);
+                    });
+                    
+                    this.socket.on('action_completed', (data) => {
+                        this.showToast('success', 'Action Completed', `${data.action} completed successfully`);
+                    });
+                    
+                    this.socket.on('chat_error', (data) => {
+                        this.isTyping = false;
+                        this.showToast('error', 'Error', data.message || data.error);
+                    });
+                    
+                    this.socket.on('chat_cleared', (data) => {
+                        this.messages = [];
+                        this.suggestions = [];
+                        this.memoryContext = [];
+                        this.showToast('success', 'Chat Cleared', 'Chat session has been cleared');
+                    });
+                },
+                
+                // Message handling
+                sendMessage(message) {
+                    if (!message.trim() || this.isTyping) return;
+                    
+                    // Add user message to UI immediately
+                    const userMessage = {
+                        id: Date.now().toString(),
+                        content: message,
+                        role: 'user',
+                        timestamp: new Date().toISOString()
+                    };
+                    this.messages.push(userMessage);
+                    
+                    // Send to server
+                    this.socket.emit('send_message', {
+                        message: message,
+                        context: {}
+                    });
+                    
+                    this.scrollToBottom();
+                },
+                
+                sendCurrentMessage() {
+                    if (this.currentMessage.trim()) {
+                        this.sendMessage(this.currentMessage);
+                        this.currentMessage = '';
+                        this.adjustTextareaHeight({ target: this.$refs.messagesContainer.querySelector('textarea') });
+                    }
+                },
+                
+                handleEnter(event) {
+                    if (event.shiftKey) {
+                        // Allow new line
+                        return;
+                    } else {
+                        // Send message
+                        this.sendCurrentMessage();
+                    }
+                },
+                
+                // UI helpers
+                adjustTextareaHeight(event) {
+                    const textarea = event.target;
+                    textarea.style.height = 'auto';
+                    textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+                },
+                
+                scrollToBottom() {
+                    this.$nextTick(() => {
+                        const container = this.$refs.messagesContainer;
+                        container.scrollTop = container.scrollHeight;
+                    });
+                },
+                
+                formatTime(timestamp) {
+                    return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                },
+                
+                // Actions
+                triggerAction(action) {
+                    this.socket.emit('trigger_action', {
+                        action: action,
+                        parameters: {}
+                    });
+                },
+                
+                getSuggestions() {
+                    this.socket.emit('get_suggestions', {
+                        query: this.currentMessage
+                    });
+                },
+                
+                clearChat() {
+                    if (confirm('Are you sure you want to clear the chat history?')) {
+                        this.socket.emit('clear_chat');
+                    }
+                },
+                
+                copyMessage(content) {
+                    navigator.clipboard.writeText(content).then(() => {
+                        this.showToast('success', 'Copied', 'Message copied to clipboard');
+                    });
+                },
+                
+                regenerateResponse(message) {
+                    // Find the user message before this assistant message
+                    const messageIndex = this.messages.findIndex(m => m.id === message.id);
+                    if (messageIndex > 0) {
+                        const userMessage = this.messages[messageIndex - 1];
+                        if (userMessage.role === 'user') {
+                            this.sendMessage(userMessage.content);
+                        }
+                    }
+                },
+                
+                exportChat() {
+                    const chatData = {
+                        session_id: this.sessionId,
+                        messages: this.messages,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    const blob = new Blob([JSON.stringify(chatData, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `chat-export-${new Date().toISOString().split('T')[0]}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    
+                    this.showToast('success', 'Exported', 'Chat history exported successfully');
+                },
+                
+                // Utility functions
+                updateMemoryContext(context) {
+                    if (context && typeof context === 'object') {
+                        this.memoryContext = Object.entries(context).map(([key, value]) => ({
+                            id: key,
+                            title: key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                            content: typeof value === 'string' ? value : JSON.stringify(value)
+                        })).slice(0, 5); // Limit to 5 items
+                    }
+                },
+                
+                loadChatHistory() {
+                    // This will be handled by socket events
+                },
+                
+                showToast(type, title, message) {
+                    this.toast = {
+                        show: true,
+                        type: type,
+                        title: title,
+                        message: message,
+                        icon: type === 'error' ? 'alert-circle' : type === 'success' ? 'check-circle' : 'info'
+                    };
+                    
+                    setTimeout(() => {
+                        this.toast.show = false;
+                    }, 4000);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

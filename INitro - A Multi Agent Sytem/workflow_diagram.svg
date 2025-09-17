@@ -1,0 +1,327 @@
+<svg width="1400" height="1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7ED321;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5BA517;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5A623;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D1891A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9013FE;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6A0DAD;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="1000" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="700" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2c3e50">INitro Multi-Agent Marketing System - Complete Workflow</text>
+  
+  <!-- User Interface Layer -->
+  <rect x="50" y="60" width="1300" height="120" rx="10" fill="url(#blueGradient)" stroke="#357ABD" stroke-width="2"/>
+  <text x="700" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">User Interface Layer</text>
+  
+  <!-- Landing Page -->
+  <rect x="80" y="100" width="150" height="60" rx="5" fill="white" stroke="#357ABD" stroke-width="1"/>
+  <text x="155" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#357ABD">Landing Page</text>
+  <text x="155" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">/</text>
+  
+  <!-- Dashboard -->
+  <rect x="260" y="100" width="150" height="60" rx="5" fill="white" stroke="#357ABD" stroke-width="1"/>
+  <text x="335" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#357ABD">Dashboard</text>
+  <text x="335" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">/dashboard</text>
+  
+  <!-- Campaign Management -->
+  <rect x="440" y="100" width="180" height="60" rx="5" fill="white" stroke="#357ABD" stroke-width="1"/>
+  <text x="530" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#357ABD">Campaign Management</text>
+  <text x="530" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Create, Approve, CRUD</text>
+  <text x="530" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Test Campaigns</text>
+  
+  <!-- Real-time Updates -->
+  <rect x="650" y="100" width="150" height="60" rx="5" fill="white" stroke="#357ABD" stroke-width="1"/>
+  <text x="725" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#357ABD">Real-time Updates</text>
+  <text x="725" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">SocketIO</text>
+  <text x="725" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Status Updates</text>
+  
+  <!-- API Endpoints -->
+  <rect x="830" y="100" width="150" height="60" rx="5" fill="white" stroke="#357ABD" stroke-width="1"/>
+  <text x="905" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#357ABD">API Endpoints</text>
+  <text x="905" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">/api/status</text>
+  <text x="905" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">/process_agents</text>
+  
+  <!-- File Upload -->
+  <rect x="1010" y="100" width="150" height="60" rx="5" fill="white" stroke="#357ABD" stroke-width="1"/>
+  <text x="1085" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#357ABD">File Upload</text>
+  <text x="1085" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">CSV, JSON, XLSX</text>
+  <text x="1085" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">/upload</text>
+  
+  <!-- Flask Application Layer -->
+  <rect x="50" y="200" width="1300" height="80" rx="10" fill="url(#greenGradient)" stroke="#5BA517" stroke-width="2"/>
+  <text x="700" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Flask Application Layer (app.py)</text>
+  <text x="700" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">Route Handling • File Processing • SocketIO Communication • Threading</text>
+  <text x="700" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">Session Management • Error Handling • Real-time Status Updates</text>
+  
+  <!-- Data Input Layer -->
+  <rect x="50" y="300" width="400" height="120" rx="10" fill="#e8f4f8" stroke="#4A90E2" stroke-width="2"/>
+  <text x="250" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">Data Input Sources</text>
+  
+  <!-- Sample Data -->
+  <rect x="80" y="340" width="120" height="60" rx="5" fill="white" stroke="#4A90E2" stroke-width="1"/>
+  <text x="140" y="365" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#4A90E2">Sample Data</text>
+  <text x="140" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">sample_data.py</text>
+  <text x="140" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Default datasets</text>
+  
+  <!-- Uploaded Files -->
+  <rect x="220" y="340" width="120" height="60" rx="5" fill="white" stroke="#4A90E2" stroke-width="1"/>
+  <text x="280" y="365" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#4A90E2">Uploaded Files</text>
+  <text x="280" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">uploads/</text>
+  <text x="280" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">CSV, JSON, XLSX</text>
+  
+  <!-- LangGraph Workflow -->
+  <rect x="500" y="300" width="850" height="120" rx="10" fill="url(#purpleGradient)" stroke="#6A0DAD" stroke-width="2"/>
+  <text x="925" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">LangGraph Multi-Agent Workflow (langgraph_workflow.py)</text>
+  
+  <!-- Workflow State -->
+  <rect x="530" y="340" width="180" height="60" rx="5" fill="white" stroke="#6A0DAD" stroke-width="1"/>
+  <text x="620" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#6A0DAD">Workflow State</text>
+  <text x="620" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Messages, Data</text>
+  <text x="620" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Status, Confidence</text>
+  <text x="620" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Human Approval</text>
+  
+  <!-- State Graph -->
+  <rect x="730" y="340" width="180" height="60" rx="5" fill="white" stroke="#6A0DAD" stroke-width="1"/>
+  <text x="820" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#6A0DAD">State Graph</text>
+  <text x="820" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Node Coordination</text>
+  <text x="820" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Flow Control</text>
+  <text x="820" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Error Handling</text>
+  
+  <!-- Human-in-Loop -->
+  <rect x="930" y="340" width="180" height="60" rx="5" fill="white" stroke="#6A0DAD" stroke-width="1"/>
+  <text x="1020" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#6A0DAD">Human-in-Loop</text>
+  <text x="1020" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Goal Approval</text>
+  <text x="1020" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Campaign Review</text>
+  <text x="1020" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Modifications</text>
+  
+  <!-- Agent Processing Layer -->
+  <rect x="50" y="440" width="1300" height="200" rx="10" fill="#fff3e0" stroke="#F5A623" stroke-width="2"/>
+  <text x="700" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">Multi-Agent Processing Layer</text>
+  
+  <!-- Agent 1 -->
+  <rect x="100" y="480" width="250" height="140" rx="8" fill="url(#orangeGradient)" stroke="#D1891A" stroke-width="2"/>
+  <text x="225" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Agent 1 - Data Analysis</text>
+  <text x="225" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">agents/agent1.py</text>
+  
+  <!-- Agent 1 Components -->
+  <rect x="120" y="530" width="80" height="25" rx="3" fill="white" stroke="#D1891A" stroke-width="1"/>
+  <text x="160" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#D1891A">Segmentation</text>
+  
+  <rect x="210" y="530" width="80" height="25" rx="3" fill="white" stroke="#D1891A" stroke-width="1"/>
+  <text x="250" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#D1891A">Goal Generation</text>
+  
+  <rect x="120" y="565" width="80" height="25" rx="3" fill="white" stroke="#D1891A" stroke-width="1"/>
+  <text x="160" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#D1891A">Campaign Creation</text>
+  
+  <rect x="210" y="565" width="80" height="25" rx="3" fill="white" stroke="#D1891A" stroke-width="1"/>
+  <text x="250" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#D1891A">Optimization</text>
+  
+  <rect x="165" y="600" width="80" height="15" rx="3" fill="white" stroke="#D1891A" stroke-width="1"/>
+  <text x="205" y="610" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#D1891A">Status Updates</text>
+  
+  <!-- Thinking Layer -->
+  <rect x="400" y="480" width="250" height="140" rx="8" fill="url(#purpleGradient)" stroke="#6A0DAD" stroke-width="2"/>
+  <text x="525" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Thinking Layer</text>
+  <text x="525" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">thinking_node/core.py</text>
+  
+  <!-- Thinking Components -->
+  <rect x="420" y="530" width="70" height="25" rx="3" fill="white" stroke="#6A0DAD" stroke-width="1"/>
+  <text x="455" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6A0DAD">Analysis</text>
+  
+  <rect x="500" y="530" width="70" height="25" rx="3" fill="white" stroke="#6A0DAD" stroke-width="1"/>
+  <text x="535" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6A0DAD">Reasoning</text>
+  
+  <rect x="580" y="530" width="70" height="25" rx="3" fill="white" stroke="#6A0DAD" stroke-width="1"/>
+  <text x="615" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6A0DAD">Preferences</text>
+  
+  <rect x="460" y="565" width="70" height="25" rx="3" fill="white" stroke="#6A0DAD" stroke-width="1"/>
+  <text x="495" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6A0DAD">Simulation</text>
+  
+  <rect x="540" y="565" width="70" height="25" rx="3" fill="white" stroke="#6A0DAD" stroke-width="1"/>
+  <text x="575" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6A0DAD">Confidence</text>
+  
+  <rect x="500" y="600" width="80" height="15" rx="3" fill="white" stroke="#6A0DAD" stroke-width="1"/>
+  <text x="540" y="610" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#6A0DAD">LangChain LLM</text>
+  
+  <!-- Agent 2 -->
+  <rect x="700" y="480" width="250" height="140" rx="8" fill="url(#greenGradient)" stroke="#5BA517" stroke-width="2"/>
+  <text x="825" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Agent 2 - Context Engineering</text>
+  <text x="825" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">agents/agent2.py</text>
+  
+  <!-- Agent 2 Components -->
+  <rect x="720" y="530" width="80" height="25" rx="3" fill="white" stroke="#5BA517" stroke-width="1"/>
+  <text x="760" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#5BA517">Memory System</text>
+  
+  <rect x="810" y="530" width="80" height="25" rx="3" fill="white" stroke="#5BA517" stroke-width="1"/>
+  <text x="850" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#5BA517">Context Store</text>
+  
+  <rect x="720" y="565" width="80" height="25" rx="3" fill="white" stroke="#5BA517" stroke-width="1"/>
+  <text x="760" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#5BA517">Decision Flows</text>
+  
+  <rect x="810" y="565" width="80" height="25" rx="3" fill="white" stroke="#5BA517" stroke-width="1"/>
+  <text x="850" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#5BA517">Implementation</text>
+  
+  <rect x="765" y="600" width="80" height="15" rx="3" fill="white" stroke="#5BA517" stroke-width="1"/>
+  <text x="805" y="610" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#5BA517">ChromaDB Vector</text>
+  
+  <!-- Tools & Services -->
+  <rect x="1000" y="480" width="250" height="140" rx="8" fill="#f0f0f0" stroke="#666" stroke-width="2"/>
+  <text x="1125" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Tools & Services</text>
+  <text x="1125" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">tools/</text>
+  
+  <!-- Tools Components -->
+  <rect x="1020" y="530" width="80" height="25" rx="3" fill="white" stroke="#666" stroke-width="1"/>
+  <text x="1060" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">LLM Service</text>
+  
+  <rect x="1110" y="530" width="80" height="25" rx="3" fill="white" stroke="#666" stroke-width="1"/>
+  <text x="1150" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Memory System</text>
+  
+  <rect x="1020" y="565" width="80" height="25" rx="3" fill="white" stroke="#666" stroke-width="1"/>
+  <text x="1060" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Retrieval</text>
+  
+  <rect x="1110" y="565" width="80" height="25" rx="3" fill="white" stroke="#666" stroke-width="1"/>
+  <text x="1150" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Communication</text>
+  
+  <rect x="1065" y="600" width="80" height="15" rx="3" fill="white" stroke="#666" stroke-width="1"/>
+  <text x="1105" y="610" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#666">OpenAI API</text>
+  
+  <!-- Data Storage Layer -->
+  <rect x="50" y="660" width="1300" height="100" rx="10" fill="#e3f2fd" stroke="#2196F3" stroke-width="2"/>
+  <text x="700" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">Data Storage & Persistence Layer</text>
+  
+  <!-- File Storage -->
+  <rect x="100" y="700" width="150" height="50" rx="5" fill="white" stroke="#2196F3" stroke-width="1"/>
+  <text x="175" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2196F3">File Storage</text>
+  <text x="175" y="735" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">uploads/, results.json</text>
+  <text x="175" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Configuration files</text>
+  
+  <!-- Vector Database -->
+  <rect x="280" y="700" width="150" height="50" rx="5" fill="white" stroke="#2196F3" stroke-width="1"/>
+  <text x="355" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2196F3">Vector Database</text>
+  <text x="355" y="735" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">ChromaDB</text>
+  <text x="355" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">agent2_memory/</text>
+  
+  <!-- Session Data -->
+  <rect x="460" y="700" width="150" height="50" rx="5" fill="white" stroke="#2196F3" stroke-width="1"/>
+  <text x="535" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2196F3">Session Data</text>
+  <text x="535" y="735" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Workflow State</text>
+  <text x="535" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">User Approvals</text>
+  
+  <!-- Cache -->
+  <rect x="640" y="700" width="150" height="50" rx="5" fill="white" stroke="#2196F3" stroke-width="1"/>
+  <text x="715" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2196F3">Cache</text>
+  <text x="715" y="735" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">LLM Responses</text>
+  <text x="715" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Agent Results</text>
+  
+  <!-- Models -->
+  <rect x="820" y="700" width="150" height="50" rx="5" fill="white" stroke="#2196F3" stroke-width="1"/>
+  <text x="895" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2196F3">Data Models</text>
+  <text x="895" y="735" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">models.py</text>
+  <text x="895" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Dataclasses</text>
+  
+  <!-- Configuration -->
+  <rect x="1000" y="700" width="150" height="50" rx="5" fill="white" stroke="#2196F3" stroke-width="1"/>
+  <text x="1075" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2196F3">Configuration</text>
+  <text x="1075" y="735" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">config.py, .env</text>
+  <text x="1075" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">API Keys, Settings</text>
+  
+  <!-- External Services -->
+  <rect x="50" y="780" width="1300" height="80" rx="10" fill="#fce4ec" stroke="#E91E63" stroke-width="2"/>
+  <text x="700" y="805" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">External Services & APIs</text>
+  
+  <!-- OpenAI -->
+  <rect x="200" y="820" width="150" height="30" rx="5" fill="white" stroke="#E91E63" stroke-width="1"/>
+  <text x="275" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#E91E63">OpenAI API</text>
+  
+  <!-- LangChain -->
+  <rect x="380" y="820" width="150" height="30" rx="5" fill="white" stroke="#E91E63" stroke-width="1"/>
+  <text x="455" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#E91E63">LangChain</text>
+  
+  <!-- LangGraph -->
+  <rect x="560" y="820" width="150" height="30" rx="5" fill="white" stroke="#E91E63" stroke-width="1"/>
+  <text x="635" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#E91E63">LangGraph</text>
+  
+  <!-- ChromaDB -->
+  <rect x="740" y="820" width="150" height="30" rx="5" fill="white" stroke="#E91E63" stroke-width="1"/>
+  <text x="815" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#E91E63">ChromaDB</text>
+  
+  <!-- Pandas -->
+  <rect x="920" y="820" width="150" height="30" rx="5" fill="white" stroke="#E91E63" stroke-width="1"/>
+  <text x="995" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#E91E63">Pandas/NumPy</text>
+  
+  <!-- Data Flow Arrows -->
+  <!-- User to Flask -->
+  <path d="M 700 180 L 700 200" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Flask to Data Input -->
+  <path d="M 250 280 L 250 300" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Flask to LangGraph -->
+  <path d="M 925 280 L 925 300" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Data Input to Agent 1 -->
+  <path d="M 250 420 L 225 480" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Agent 1 to Thinking Layer -->
+  <path d="M 350 550 L 400 550" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Thinking Layer to Agent 2 -->
+  <path d="M 650 550 L 700 550" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Agent 2 to Tools -->
+  <path d="M 950 550 L 1000 550" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Agents to Storage -->
+  <path d="M 525 620 L 525 660" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 825 620 L 825 660" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Storage to External Services -->
+  <path d="M 700 760 L 700 780" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+  
+  <!-- Workflow Steps -->
+  <text x="50" y="890" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">Workflow Steps:</text>
+  <text x="50" y="910" font-family="Arial, sans-serif" font-size="12" fill="#666">1. User uploads data or uses sample data → 2. Flask processes request → 3. LangGraph coordinates workflow</text>
+  <text x="50" y="925" font-family="Arial, sans-serif" font-size="12" fill="#666">4. Agent1 analyzes data, creates segments/goals/campaigns → 5. Thinking Layer processes with AI reasoning</text>
+  <text x="50" y="940" font-family="Arial, sans-serif" font-size="12" fill="#666">6. Human approval for goals → 7. Agent2 creates decision flows → 8. Results stored and displayed in UI</text>
+  
+  <!-- Legend -->
+  <rect x="1200" y="880" width="180" height="110" rx="5" fill="white" stroke="#ccc" stroke-width="1"/>
+  <text x="1290" y="900" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2c3e50">Legend</text>
+  
+  <rect x="1210" y="910" width="15" height="10" fill="url(#blueGradient)"/>
+  <text x="1235" y="920" font-family="Arial, sans-serif" font-size="10" fill="#666">User Interface</text>
+  
+  <rect x="1210" y="925" width="15" height="10" fill="url(#greenGradient)"/>
+  <text x="1235" y="935" font-family="Arial, sans-serif" font-size="10" fill="#666">Flask Application</text>
+  
+  <rect x="1210" y="940" width="15" height="10" fill="url(#orangeGradient)"/>
+  <text x="1235" y="950" font-family="Arial, sans-serif" font-size="10" fill="#666">Agent Processing</text>
+  
+  <rect x="1210" y="955" width="15" height="10" fill="url(#purpleGradient)"/>
+  <text x="1235" y="965" font-family="Arial, sans-serif" font-size="10" fill="#666">AI/LangGraph</text>
+  
+  <rect x="1210" y="970" width="15" height="10" fill="#e3f2fd" stroke="#2196F3" stroke-width="1"/>
+  <text x="1235" y="980" font-family="Arial, sans-serif" font-size="10" fill="#666">Data Storage</text>
+</svg>

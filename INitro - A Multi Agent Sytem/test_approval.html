@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Approval Workflow</title>
+    <script>
+        // Simple test to verify approval workflow
+        function testApprovalWorkflow() {
+            console.log('Testing approval workflow...');
+            
+            // Open the main application
+            window.open('http://127.0.0.1:5000/', '_blank');
+            
+            // Instructions for manual testing
+            alert(`Manual Test Instructions:
+
+1. Open browser console (F12)
+2. Run: testApprovalWorkflow()
+3. Select campaigns in Marketing Campaigns section
+4. Click 'Approve Selected'
+5. Check All Campaigns section for approved campaigns
+6. Verify console logs show campaign additions`);
+        }
+        
+        // Auto-run test when page loads
+        window.onload = function() {
+            testApprovalWorkflow();
+        };
+    </script>
+</head>
+<body>
+    <h1>Campaign Approval Test</h1>
+    <p>This page will help test the campaign approval workflow.</p>
+    <button onclick="testApprovalWorkflow()">Run Test</button>
+</body>
+</html>
